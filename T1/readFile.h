@@ -1,15 +1,18 @@
-#ifndef READFILE_H
-#define READFILE_H
+typedef struct {
+    int id;
+    char nomeLogico[20];
+    char nomeFisico[20];
+} Tabela;
 
-struct att {
-    int id_arquivo_att;
-    char nome_att[20];
-    char tipo;
-    char opcional;
-    int tamanho;
-}; 
-typedef struct att atributo;
+typedef struct {
+    int tableId;
+    char attributeName[20];
+    char type;
+    char optional;
+    int size;
+} AttributeEntry;
 
-int readFile(char nomeLog[20]);
-
-#endif
+void readFile(const char* nomeLogico);
+int findTable(const char* tableName, Tabela* tableEntry);
+int findAttributes(int tableId, AttributeEntry* attributes, int maxAttributes);
+void readPhysicalFile(const char* filename, AttributeEntry* attributes, int attributeCount);
